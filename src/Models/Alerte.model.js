@@ -1,5 +1,5 @@
 
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const AlerteSchema = new mongoose.Schema({
    message: {
@@ -26,4 +26,4 @@ const AlerteSchema = new mongoose.Schema({
 
 const Alerte = mongoose.model('Alerte', AlerteSchema);
 
-module.exports = Alerte;
+export default Alerte;

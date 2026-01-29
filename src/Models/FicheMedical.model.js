@@ -1,5 +1,5 @@
 
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const ficheMedicalSchema = new mongoose.Schema({
     user: {
@@ -30,4 +30,4 @@ const ficheMedicalSchema = new mongoose.Schema({
 
 const FicheMedical = mongoose.model('FicheMedical', ficheMedicalSchema);
 
-module.exports = FicheMedical;
+export default FicheMedical;

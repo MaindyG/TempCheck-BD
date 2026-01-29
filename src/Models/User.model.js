@@ -1,5 +1,5 @@
 
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
     nom: {
@@ -19,17 +19,23 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    role: {
+        type: String,
+        enum: ['parent', 'enfant', 'admin'],
+        default: 'parent'
+    },
     contact_urgence: {
-        type: number,
+        type: Number,
         required: false
     },
     fichesMedicales: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'FicheMedical'
+        ref: 'FicheMedical',
+        required: false
     }]
 },
 );
 
 const User = mongoose.model('User', UserSchema);
 
-module.exports = User;
+export default User;
