@@ -28,11 +28,21 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         required: false
     },
-    fichesMedicales: [{
+    fichesMedicales: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'FicheMedical',
         required: false
-    }]
+    },
+    temperature: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Temperature',
+        required: false
+    },
+    alerte: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Alerte',
+        required: false
+    }
 },
 );
 
