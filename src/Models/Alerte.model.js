@@ -2,6 +2,10 @@
 const mongoose = require('mongoose');
 
 const AlerteSchema = new mongoose.Schema({
+    typeAlerte: {
+        type: String,
+        required: true
+    },
    message: {
         type: String,
         required: false
@@ -13,7 +17,6 @@ const AlerteSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true,
     },
     temperature: {
         type: mongoose.Schema.Types.ObjectId,
