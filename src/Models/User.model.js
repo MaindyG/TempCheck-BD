@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
         required: true
     },
     contact_urgence: {
-        type: number,
+        type: Number,
         required: false
     },
     fichesMedicales: [{

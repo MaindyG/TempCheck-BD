@@ -4,6 +4,9 @@ const cors = require('cors');
 const connectDB = require('./src/Config/db');
 const Temperature = require('./src/Models/Temperature.model');
 
+const authRoutes = require('./src/Routes/AuthRoutes')
+const userRoutes = require('./src/Routes/userRoutes');
+const alertRoutes = require('./src/Routes/AlertRoutes');
 const temperatureRoute = require('./src/Routes/temperature.route');
 const app = express();
 app.use(express.json());
@@ -18,6 +21,10 @@ app.get('/',(req, res) => {
 });
 
 app.use('/api/temperature', temperatureRoute);
+app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/alerts", alertRoutes);
+
 
 
 

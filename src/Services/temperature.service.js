@@ -1,7 +1,6 @@
 
 
-class TemperatureService {
-    static determineStatut = (temperature, q1, q2, q3) => {
+    export const determineStatut = (temperature, q1, q2, q3) => {
         const temp = temperature;
         const questions = [q1, q2, q3];
         const positiveResponses = questions.filter(q => q === true).length;
@@ -43,7 +42,7 @@ class TemperatureService {
         };
     }
 
-    static createAlerte = (temperature, statut) => {
+    export const createAlerte = (temperature, statut) => {
         return {
             typeAlerte: statut.statut,
             message: statut.alerteEnvoyee,
@@ -52,7 +51,6 @@ class TemperatureService {
             temperature: temperature._id
         };
     }
-}
 
-    module.exports = TemperatureService;
+
 
