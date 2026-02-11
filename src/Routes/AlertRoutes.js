@@ -1,13 +1,14 @@
-import { Router } from 'express';
-import { createAlert, getAlertsByUser, deleteAlert } from '../Controllers/AlertController.js';
-import { VerifyToken } from '../Middleware/AuthMiddleware.js';
+const express = require('express');
+const { createAlerte, getAlertsByUser, deleteAlerts } = require('../Controllers/AlertController.js');
+const { VerifyToken } = require('../Middleware/AuthMiddleware.js');
 
 
-const router = Router();
+const router = express.Router();
 
 
-router.post('/createAlert', VerifyToken, createAlert);
+router.post('/createAlert', VerifyToken, createAlerte);
 router.get('/alerts/:userId', VerifyToken, getAlertsByUser);
-router.delete('/deleteAlert/:alertId', VerifyToken, deleteAlert);
+router.delete('/deleteAlert/:alertId', VerifyToken, deleteAlerts);
 
-export default router
+module.exports = router;
+

@@ -1,25 +1,33 @@
-import dotenv from 'dotenv';
-import express from 'express';
-import cors from 'cors';
-import connectDB from './src/Config/db.js'; 
-import authRoutes from './src/Routes/AuthRoutes.js';
-import userRoutes from './src/Routes/UserRoutes.js';
-import alertRoutes from './src/Routes/AlertRoutes.js';
-
-dotenv.config();
-
+require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const connectDB = require('./src/Config/db');
+const Temperature = require('./src/Models/Temperature.model');
+const authRoutes = require('./src/Routes/AuthRoutes')
+const userRoutes = require('./src/Routes/UserRoutes');
+const alertRoutes = require('./src/Routes/AlertRoutes');
+const temperatureRoute = require('./src/Routes/temperature.route');
 const app = express();
-
+app.use(express.json());
 
 connectDB(); 
 
 app.use(express.json());
 app.use(cors());
 
+app.get('/',(req, res) => {
+  res.send('Bienvenue sur l\'API TempCheck');
+});
 
-app.use("/api/auth", authRoutes);
+
+app.use('/api/temperature', temperatureRoute);
 app.use("/api/users", userRoutes);
-app.use("/api/alerts", alertRoutes)
+app.use("/api/auth", authRoutes);
+app.use("/api/alerts", alertRoutes);
+
+
+
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
