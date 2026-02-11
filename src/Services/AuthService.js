@@ -21,7 +21,7 @@ export const registerUser = async (userData) => {
         return savedUser;
         
     } catch (error) {
-        throw new Error("Erreur serveur internal");
+        throw error
     }
 
 }
@@ -40,6 +40,6 @@ export const loginUser = async (email, password) => {
         }
         return user;
     } catch (error) {
-        throw new Error('Erreur serveur internal');
+        throw error;
     }
 }
