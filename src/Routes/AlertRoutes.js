@@ -11,3 +11,4 @@ router.get('/alerts/:userId', VerifyToken, getAlertsByUser);
 router.delete('/deleteAlert/:alertId', VerifyToken, deleteAlerts);
 
 module.exports = router;
+

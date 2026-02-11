@@ -2,6 +2,7 @@ const express = require('express');
 const { createUser, getAllUsers, getUserByEmail, modifyUser, deleteUser, getCurrentUser } = require ('../Controllers/UserController.js');
 const { VerifyToken } =  require('../Middleware/AuthMiddleware.js');
 
+
 const router = express.Router();
 
 router.post('/newUser', createUser);
@@ -13,3 +14,4 @@ router.delete('/deleteUser/:id', deleteUser)
 
 
 module.exports = router;
+
