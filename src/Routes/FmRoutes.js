@@ -1,7 +1,8 @@
-import { createFicheMedical, getFicheMedicalByUser } from "../Controllers/FmController";
-import { Router } from "express";
+const { createFicheMedical, getFicheMedicalByUser } = require('../Controllers/FmController.js');
+const express = require('express');
 
-const router = Router();
+
+const router = express.Router();
 
 
 router.post('/createFm', createFicheMedical);

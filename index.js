@@ -2,7 +2,6 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./src/Config/db');
-const Temperature = require('./src/Models/Temperature.model');
 const authRoutes = require('./src/Routes/AuthRoutes')
 const userRoutes = require('./src/Routes/UserRoutes');
 const alertRoutes = require('./src/Routes/AlertRoutes');
@@ -10,8 +9,7 @@ const temperatureRoute = require('./src/Routes/temperature.route');
 const app = express();
 app.use(express.json());
 
-connectDB(); 
-
+connectDB();
 app.use(express.json());
 app.use(cors());
 

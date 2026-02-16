@@ -1,4 +1,3 @@
-
 import mongoose from 'mongoose';
 
 const ficheMedicalSchema = new mongoose.Schema({

@@ -1,8 +1,8 @@
-const Temperature = require('../Models/Temperature.model');
-const Alerte = require('../Models/Alerte.model');
-const TemperatureService = require('../Services/temperature.service');
+import Temperature from '../Models/Temperature.model.js';
+import Alerte from '../Models/Alerte.model.js';
+import * as TemperatureService from '../Services/temperature.service.js';
 
-const getTemperatures = async (req, res) => {
+export const getTemperatures = async (req, res) => {
     try {
         const temperatures = await Temperature.find();
         res.status(200).json(temperatures);
@@ -11,7 +11,7 @@ const getTemperatures = async (req, res) => {
     }
 };
 
-const getSingleTemperature = async (req, res) => {
+export const getSingleTemperature = async (req, res) => {
     try {
         const { id } = req.params;
         const temp = await Temperature.findById(id);
@@ -21,7 +21,7 @@ const getSingleTemperature = async (req, res) => {
     }
 }
 
-const addTemperature = async (req, res) => {
+export const addTemperature = async (req, res) => {
     try {
         const { temperature, question1, question2, question3, user } = req.body;
         const defineStatut = TemperatureService.determineStatut(temperature, question1, question2, question3);
@@ -47,7 +47,7 @@ const addTemperature = async (req, res) => {
 };
 
 
-const updateTemperature = async (req, res) => {
+export const updateTemperature = async (req, res) => {
     try {
         const { id } = req.params;
         const {temperature, question1, question2, question3} = req.body;
@@ -70,7 +70,7 @@ const updateTemperature = async (req, res) => {
     }
 }
 
-const deleteTemperature = async (req, res) => {
+export const deleteTemperature = async (req, res) => {
     try {
         const { id } = req.params;
         const temp = await Temperature.findByIdAndDelete(id);
@@ -84,13 +84,6 @@ const deleteTemperature = async (req, res) => {
 };
 
 
-module.exports = {
-    getTemperatures,
-    getSingleTemperature,
-    addTemperature,
-    updateTemperature,
-    deleteTemperature
-};
 
 
 

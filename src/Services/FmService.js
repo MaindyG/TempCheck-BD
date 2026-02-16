@@ -1,4 +1,4 @@
-import FicheMedical from "../Models/FicheMedical.model";
+const FicheMedical = require('../Models/FicheMedical.model');
 
 
 
