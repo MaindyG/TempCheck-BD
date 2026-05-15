@@ -5,7 +5,7 @@ const connectDB = require('./src/config/db');
 const authRoutes = require('./src/Routes/AuthRoutes')
 const userRoutes = require('./src/Routes/UserRoutes');
 const alertRoutes = require('./src/Routes/AlertRoutes');
-const temperatureRoute = require('./src/Routes/temperature.route');
+const temperatureRoute = require('./src/Routes/Temperature.route');
 const app = express();
 app.use(express.json());
 
