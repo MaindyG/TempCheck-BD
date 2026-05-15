@@ -4,7 +4,11 @@ import * as TemperatureService from '../Services/temperature.service.js';
 
 export const getTemperatures = async (req, res) => {
     try {
-        const temperatures = await Temperature.find();
+        const userId = req.user?.id;
+        if (!userId) {
+            return res.status(401).json({ message: 'Utilisateur non authentifié' });
+        }
+        const temperatures = await Temperature.find({ user: userId });
         res.status(200).json(temperatures);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -14,7 +18,14 @@ export const getTemperatures = async (req, res) => {
 export const getSingleTemperature = async (req, res) => {
     try {
         const { id } = req.params;
+        const userId = req.user?.id;
+        if (!userId) {
+            return res.status(401).json({ message: 'Utilisateur non authentifié' });
+        }
         const temp = await Temperature.findById(id);
+        if (!temp) {
+            return res.status(404).json({ message: 'Température non trouvée' });
+        }
         res.status(200).json(temp);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -41,6 +52,30 @@ export const addTemperature = async (req, res) => {
         const alerte = await Alerte.create(alerteData);
 
         res.status(201).json({ temperature: tempEntered, alerte: alerte });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const addTemperatureAvecQuestions= async (req, res) => {
+    try {
+        const { temperature, question1, question2, question3, user } = req.body;
+        const defineStatut = TemperatureService.determineStatut(temperature, question1, question2, question3);
+
+        const temp = {
+            user, temperature, question1, question2, question3,
+            statut: defineStatut.statut,
+            alerteEnvoyee: defineStatut.alerteEnvoyee
+        };
+
+        const tempEntered = await Temperature.create(temp);
+        
+        if (defineStatut.statut !== 'Neutre') {
+            const alerteData = TemperatureService.createAlerte(tempEntered, defineStatut);
+            await Alerte.create(alerteData);
+        }
+
+        res.status(201).json({ success: true, temperature: tempEntered });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
